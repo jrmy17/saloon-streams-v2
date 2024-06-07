@@ -77,7 +77,6 @@ app.get("/streams", async (req, res) => {
       "Saloon RP",
       "Saloon RôlePlay",
       "SaloonRP",
-      "RDR2",
     ];
     const filteredStreams = filterStreamsByTitle(streams, keywords);
 
