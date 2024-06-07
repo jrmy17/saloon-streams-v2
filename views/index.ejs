@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link
+      href="https://db.onlinewebfonts.com/c/ab21a97b9cae2e116d8d1473baefc9f0?family=RDR+Lino+Regular"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <title>Streams Salon RôlePlay</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="/style.css" />
+    <style>
+      #loading {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 24px;
+      }
+      .hidden {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+      <img src="/saloon.png" alt="" width="50" height="50" />
+      <a class="navbar-brand" href="#">Twitch Streams - Saloon RôlePlay</a>
+    </nav>
+    <div class="container">
+      <h1 class="mt-5 text-center">Streams Saloon RôlePlay</h1>
+      <div id="loading">Chargement...</div>
+      <div id="stream-grid" class="stream-grid hidden"></div>
+    </div>
+    <footer class="footer">
+      <div class="container">
+        <span>Saloon RôlePlay - Tous droits réservés</span>
+      </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        fetch("/streams")
+          .then((response) => response.json())
+          .then((data) => {
+            const streamGrid = document.getElementById("stream-grid");
+            const loading = document.getElementById("loading");
+
+            if (data.streams.length === 0) {
+              loading.innerText = "Aucun stream trouvé";
+              return;
+            }
+
+            data.streams.forEach((stream) => {
+              const card = document.createElement("div");
+              card.className = "card mb-4";
+              card.dataset.streamId = stream.id;
+              card.innerHTML = `
+                <img src="${stream.thumbnail_url
+                  .replace("{width}", "320")
+                  .replace(
+                    "{height}",
+                    "180"
+                  )}" class="card-img-top" alt="..." />
+                <div class="card-body">
+                  <h5 class="card-title">${stream.title}</h5>
+                  <div class="card-f">
+                    <a href="https://www.twitch.tv/${
+                      stream.user_name
+                    }" class="card-link" target="_blank">${stream.user_name}</a>
+                    <p class="card-text spec">${
+                      stream.viewer_count
+                    } spectateurs</p>
+                    <p class="card-text">Début à ${stream.started_at}</p>
+                    <a href="https://www.twitch.tv/${
+                      stream.user_name
+                    }" class="btn btn-primary" target="_blank">Regarder</a>
+                  </div>
+                </div>
+              `;
+              streamGrid.appendChild(card);
+            });
+
+            loading.remove(); // Supprime l'élément de chargement
+            streamGrid.classList.remove("hidden");
+          })
+          .catch((error) => {
+            const loading = document.getElementById("loading");
+            loading.innerText = "Erreur lors du chargement des streams";
+          });
+      });
+    </script>
+  </body>
+</html>

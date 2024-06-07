@@ -1,0 +1,114 @@
+body {
+  background-color: #0e0e10;
+  color: #dadada;
+  font-family: "RDR Lino Regular";
+}
+
+.navbar {
+  background-color: #9146ff;
+  display: flex;
+  gap: 20px;
+}
+
+.navbar-brand,
+.navbar-nav .nav-link {
+  color: #ffffff !important;
+}
+
+h1 {
+  margin-bottom: 40px;
+}
+
+.stream-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  padding-bottom: 5rem;
+}
+
+.card {
+  background-color: #18181b;
+  border: none;
+  width: 320px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.card-img-top {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.card-title,
+.card-text {
+  color: #ffffff;
+  margin-bottom: 0px;
+}
+
+.card-title {
+  font-size: 1.2em;
+}
+
+.btn-primary {
+  background-color: #9146ff;
+  border-color: #9146ff;
+  width: 100%;
+}
+
+.btn-primary:hover {
+  background-color: #772ce8;
+  border-color: #772ce8;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-family: "Arial", sans-serif;
+}
+
+.card-link {
+  color: #9146ff;
+}
+
+.card-link:hover {
+  color: #772ce8;
+}
+
+.footer {
+  color: #ffffff;
+  background-color: #9146ff;
+  text-align: center;
+  padding: 10px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.spec {
+  color: #ff2f14;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-track {
+  background: #18181b;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #9146ff;
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #772ce8;
+  border-radius: 20px;
+}
